@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="TbSucursal">
+ 
+    <resultMap id="sucursalResultMap" type="com.appclientes.model.Sucursal">
+        <result property="sucursal" column="SUCURSAL"/>
+        <association property="proveedor" column="NIT"
+                javaType="Proveedor">
+                <id property="nit" column="NIT" />
+                <result property="nit" column="NIT" />
+                <result property="nombre" column="NOMBRE" />                
+        </association>        
+    </resultMap>   
+   
+    
+ 
+    <select id="getAll" resultMap="sucursalResultMap">
+        SELECT SUCURSALES.NIT, PROVEEDORES.NOMBRE,  SUCURSALES.SUCURSAL FROM SUCURSALES
+        INNER JOIN PROVEEDORES ON SUCURSALES.NIT=PROVEEDORES.NIT
+    </select>
+     
+
+ 
+    <insert id="insert" parameterType="sucursal">
+    INSERT INTO SUCURSALES (NIT, SUCURSAL)
+        VALUES (#{proveedor.nit} ,#{sucursal});
+    </insert>
+
+ 
+</mapper>

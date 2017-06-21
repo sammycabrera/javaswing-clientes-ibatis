@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : mybatis-config.xml
+    Created on : 9 de marzo de 2016, 10:51
+    Author     : Samir Cabrera
+    Description:
+        Purpose of the document follows.
+-->
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>       
+    
+    <properties resource="configuracion.properties"/>
+    <typeAliases>
+        <typeAlias type="com.appclientes.model.Usuario" alias="usuario"/>
+        <typeAlias type="com.appclientes.model.Cliente" alias="cliente"/>
+        <typeAlias type="com.appclientes.model.Proveedor" alias="proveedor"/>    
+        <typeAlias type="com.appclientes.model.Sucursal" alias="sucursal"/>    
+    </typeAliases>    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/appclientes/data/TbUsuario.xml"/>
+        <mapper resource="com/appclientes/data/TbCliente.xml"/>
+        <mapper resource="com/appclientes/data/TbProveedor.xml"/>
+        <mapper resource="com/appclientes/data/TbSucursal.xml"/>
+    </mappers>
+    
+
+        
+</configuration>

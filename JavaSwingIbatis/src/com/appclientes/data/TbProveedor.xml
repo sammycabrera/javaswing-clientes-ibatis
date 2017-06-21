@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="TbProveedor">
+ 
+    <resultMap id="proveedorResultMap" type="com.appclientes.model.Proveedor">
+        <result property="nit" column="NIT"/>
+        <result property="nombre" column="NOMBRE"/>
+    </resultMap>            
+    
+ 
+    <select id="getAll" resultMap="proveedorResultMap">
+        SELECT NIT, NOMBRE FROM PROVEEDORES
+    </select>
+     
+    <select id="getById" parameterType="java.lang.String" resultMap="proveedorResultMap">
+        SELECT NIT, NOMBRE FROM PROVEEDORES WHERE NIT = #{nit}
+    </select>
+ 
+    <delete id="deleteById" parameterType="java.lang.String">
+        DELETE from PROVEEDORES WHERE NIT = #{nit};
+    </delete>
+ 
+    <insert id="insert" parameterType="proveedor">
+    INSERT INTO PROVEEDORES (NIT, NOMBRE)
+        VALUES (#{nit} ,#{nombre});
+    </insert>
+ 
+    <update id="update" parameterType="proveedor">
+        UPDATE PROVEEDORES
+        SET
+            NOMBRE= #{nombre}            
+        WHERE NIT = #{nit};
+    </update>
+ 
+</mapper>

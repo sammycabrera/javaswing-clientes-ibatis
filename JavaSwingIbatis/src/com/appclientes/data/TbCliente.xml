@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="TbCliente">
+ 
+    <resultMap id="clienteResultMap" type="com.appclientes.model.Cliente">
+        <result property="codigo" column="CODIGO"/>
+        <result property="nit" column="NIT"/>
+        <result property="email" column="EMAIL"/>
+        <result property="pais" column="PAIS"/>
+        <result property="fechaRegistro" jdbcType="DATE" javaType="java.util.Date" column="FECHAREGISTRO"/>
+        <result property="razonSocial" column="RAZONSOCIAL"/>
+        <result property="idioma" column="IDIOMA"/>
+        <result property="categoria" column="CATEGORIA"/>           
+    </resultMap>        
+    
+ 
+    <select id="getAll" resultMap="clienteResultMap">
+        SELECT CODIGO, NIT, EMAIL, PAIS, FECHAREGISTRO,
+        RAZONSOCIAL, IDIOMA, CATEGORIA FROM CLIENTES
+    </select>
+     
+    <select id="getById" parameterType="java.lang.Integer" resultMap="clienteResultMap">
+        SELECT CODIGO, NIT, EMAIL, PAIS, FECHAREGISTRO,
+        RAZONSOCIAL, IDIOMA, CATEGORIA FROM CLIENTES WHERE CODIGO = #{codigo}
+    </select>
+ 
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE from CLIENTES WHERE CODIGO = #{codigo};
+    </delete>
+ 
+    <insert id="insert"  parameterType="cliente">
+    INSERT INTO CLIENTES (NIT, EMAIL, PAIS, FECHAREGISTRO,
+        RAZONSOCIAL, IDIOMA, CATEGORIA)
+        VALUES (#{nit}, #{email}, #{pais},
+                #{fechaRegistro}, #{razonSocial},
+                #{idioma}, #{categoria});
+    </insert>
+ 
+    <update id="update" parameterType="cliente">
+        UPDATE CLIENTES
+        SET
+            NIT = #{nit},
+            EMAIL = #{email},            
+            PAIS = #{pais},
+            FECHAREGISTRO = #{fechaRegistro},
+            RAZONSOCIAL = #{razonSocial},
+            IDIOMA = #{idioma},
+            CATEGORIA = #{categoria}
+        WHERE CODIGO = #{codigo};
+    </update>
+ 
+</mapper>
